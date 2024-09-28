@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="my.css">
+    <title>추가</title>
+
+    <style>
+        body {
+            background-color: #333;
+            font-family: Arial;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #444;
+            padding: 50px;
+            border-radius: 20px;
+            width: 700px;
+        }
+
+        .input-box {
+            margin-bottom: 20px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #666;
+            border-radius: 10px;
+            background-color: #555;
+            color: #fff;
+        }
+
+        .input-box.invalid input {
+            border: 2px solid red;
+        }
+
+        .input-box.valid input {
+            border: 2px solid green;
+        }
+
+        .error-message {
+            color: red;
+            display: none;
+        }
+
+        .input-box.invalid .error-message {
+            display: block;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>회원 정보 입력</h2>
+
+        <div class="input-box" id="id-box">
+            <label for="id">아이디</label><br>
+            <input type="text" id="id" name="id" placeholder="@handong.ac.kr" required>
+            <p class="error-message"> * 아이디는 필수 입력 사항입니다.</p>
+        </div>
+
+        <div class="input-box" id="password-box">
+            <label for="password">비밀번호</label><br>
+            <input type="password" id="password" name="password" placeholder="비밀번호" required>
+            <p class="error-message"> * 비밀번호는 필수 입력 사항입니다.</p>
+        </div>
+
+        <div class="input-box" id="email-box">
+            <label for="email">이메일</label><br>
+            <input type="email" id="email" name="email" placeholder="example@handong.ac.kr">
+        </div>
+
+        <div class="input-box" id="name-box">
+            <label for="name">이름</label><br>
+            <input type="text" id="name" name="name" placeholder="이름" required>
+            <p class="error-message"> * 이름은 필수 입력 사항입니다.</p>
+        </div>
+
+        <div class="input-box" id="birth-box">
+            <label for="birth">생년월일</label><br>
+            <input type="text" id="birth" name="birth" placeholder="YYYYMMDD" required>
+            <p class="error-message"> * 생년월일은 필수 입력 사항입니다.</p>
+        </div>
+
+        <div class="input-box" id="phone-box">
+            <label for="phone">전화번호</label><br>
+            <input type="tel" id="phone" name="phone" placeholder="010-0000-0000" required>
+            <p class="error-message"> * 전화번호는 필수 입력 사항입니다.</p>
+        </div>
+
+        <button id="submit-btn" class="btn btn-primary">제출</button>
+    </div>
+
+    <script>
+        function validateInput(inputElement) {
+            const value = inputElement.value.trim();
+            if (value === "") {
+                inputElement.parentElement.classList.add('invalid');
+                inputElement.parentElement.classList.remove('valid');
+            } else {
+                inputElement.parentElement.classList.add('valid');
+                inputElement.parentElement.classList.remove('invalid');
+            }
+        }
+
+        function addRealTimeValidation(inputElement) {
+            inputElement.addEventListener('blur', function() {
+                validateInput(inputElement);  
+            });
+        }
+
+        const idInput = document.getElementById('id');
+        const passwordInput = document.getElementById('password');
+        const emailInput = document.getElementById('email');
+        const nameInput = document.getElementById('name');
+        const birthInput = document.getElementById('birth');
+        const phoneInput = document.getElementById('phone');
+
+        addRealTimeValidation(idInput);
+        addRealTimeValidation(passwordInput);
+        addRealTimeValidation(emailInput);
+        addRealTimeValidation(nameInput);
+        addRealTimeValidation(birthInput);
+        addRealTimeValidation(phoneInput);
+
+        document.getElementById('submit-btn').addEventListener('click', function(event) {
+            event.preventDefault(); 
+
+            validateInput(idInput);
+            validateInput(passwordInput);
+            validateInput(emailInput);
+            validateInput(nameInput);
+            validateInput(birthInput);
+            validateInput(phoneInput);
+
+            const isValid = [...document.querySelectorAll('.input-box')].every(box => !box.classList.contains('invalid'));
+
+            if (isValid) {
+                window.location.href = 'index.htm';
+            } else {
+                alert('모든 정보를 입력하세요.');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
