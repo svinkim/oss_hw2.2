@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 4 : 동적페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #add-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #delete-btn {
+            background-color: #f44336;
+            color: white;
+        }
+      
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>Dynamic Web Page</h1>
+        <h6>by Seongbin Kim</h6>
+
+        <input type="text" id="item-input" placeholder="항목을 입력하시오.">
+        <br>
+        <button id="add-btn">추가</button>
+        <button id="delete-btn">삭제</button>
+
+        <ul id="item-list">
+            <!-- 리스트 항목들이 여기에 추가됩니다 -->
+        </ul>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const addButton = document.getElementById('add-btn');
+            const deleteButton = document.getElementById('delete-btn');
+            const inputField = document.getElementById('item-input');
+            const itemList = document.getElementById('item-list');
+
+            addButton.addEventListener('click', function() {
+                const inputValue = inputField.value.trim();
+                
+                if (inputValue !== "") {
+                    // 입력된 값에서 콤마(,)를 기준으로 분리하여 배열 생성
+                    const items = inputValue.split(',');
+
+                    // 각 항목을 리스트에 추가
+                    items.forEach(function(item) {
+                        const trimmedItem = item.trim();  // 각 항목의 앞뒤 공백 제거
+                        if (trimmedItem !== "") {
+                            const listItem = document.createElement('li');
+                            listItem.textContent = trimmedItem;
+                            itemList.appendChild(listItem);
+                        }
+                    });
+
+                    // 입력 필드 초기화
+                    inputField.value = "";
+                }
+            });
+
+            deleteButton.addEventListener('click', function() {
+                itemList.innerHTML = "";  // 리스트 전체 삭제
+            });
+        };
+    </script>
+
+</body>
+</html>
+
