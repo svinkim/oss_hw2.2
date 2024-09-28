@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="my.css">
+    <title>회원 정보 보기</title>
+    <style>
+        body {
+            background-color: #333;
+            font-family: Arial;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #444;
+            padding: 50px;
+            border-radius: 20px;
+            width: 700px;
+        }
+
+        .div_data {
+            margin-bottom: 20px;
+            background-color: #555;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h2>회원 정보</h2>
+
+    <div style="text-align: right;">
+        <a href="./add.htm" class="btn btn-warning">회원 추가</a>
+        <a id="edit-link" class="btn btn-warning">수정</a>
+        <a href="javascript:confirm('지울까요?')" class="btn btn-warning">삭제</a>
+        <a href="./index.htm" class="btn btn-warning">목록</a>
+    </div>
+
+    <div class="div_data">
+        <strong>아이디:</strong> <span id="user-id"></span>
+    </div>
+    <div class="div_data">
+        <strong>이메일:</strong> <span id="user-email"></span>
+    </div>
+    <div class="div_data">
+        <strong>이름:</strong> <span id="user-fullname"></span>
+    </div>
+    <div class="div_data">
+        <strong>생년월일:</strong> <span id="user-birth"></span>
+    </div>
+    <div class="div_data">
+        <strong>전화번호:</strong> <span id="user-phone"></span>
+    </div>
+</div>
+
+<script>
+    function getQueryParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+            id: params.get('id'),
+            name: params.get('name'),
+            email: params.get('email'),
+            fullName: params.get('fullName'),
+            birth: params.get('birth'),
+            phone: params.get('phone')
+        };
+    }
+
+    window.onload = function() {
+        const { id, name, email, fullName, birth, phone } = getQueryParams();
+        document.getElementById('user-id').innerText = name;
+        document.getElementById('user-email').innerText = email;
+        document.getElementById('user-fullname').innerText = fullName;
+        document.getElementById('user-birth').innerText = birth;
+        document.getElementById('user-phone').innerText = phone;
+
+        // 수정 버튼을 클릭했을 때 해당 정보를 edit.htm으로 전달
+        document.getElementById('edit-link').href = `edit.htm?id=${id}&name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&fullName=${encodeURIComponent(fullName)}&birth=${encodeURIComponent(birth)}&phone=${encodeURIComponent(phone)}`;
+    };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+/* 공통 스타일 */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #444;
+    padding: 50px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.input-box, .div_data {
+    margin-bottom: 20px;
+    background-color: #555;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #666;
+    border-radius: 10px;
+    background-color: #555;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    background-color: #666;
+    border-color: #007bff;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* 데스크탑용 스타일 */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 800px;
+        padding: 60px;
+    }
+    
+    h2 {
+        font-size: 2.5rem;
+    }
+    
+    input, select, textarea {
+        padding: 15px;
+    }
+
+    button {
+        padding: 15px 25px;
+    }
+}
+
+/* 모바일용 스타일 */
+@media (max-width: 768px) {
+    .container {
+        padding: 30px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    input, select, textarea {
+        padding: 8px;
+    }
+
+    button {
+        padding: 8px 15px;
+    }
+    
+    .div_data, .input-box {
+        padding: 8px;
+    }
+}
