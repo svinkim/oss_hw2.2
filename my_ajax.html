@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hw4_1</title>
+  <style>
+    body {
+      background-color: #333;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #444;
+      padding: 40px;
+      border-radius: 20px;
+      width: 700px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .container h1, .container h2 {
+      text-align: center;
+      color: #fff;
+    }
+
+    .input-box {
+      margin-bottom: 20px;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #666;
+      border-radius: 10px;
+      background-color: #555;
+      color: #fff;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      background-color: #28a745;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background-color: #218838;
+    }
+
+    .error-message {
+      color: red;
+      display: none;
+    }
+
+    .input-box.invalid input {
+      border: 2px solid red;
+    }
+
+    .input-box.valid input {
+      border: 2px solid green;
+    }
+
+    .input-box.invalid .error-message {
+      display: block;
+    }
+
+    #userList {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 20px;
+      max-height: 150px;
+      overflow-y: auto;
+      background-color: #555;
+      border-radius: 10px;
+    }
+
+    #userList li {
+      padding: 10px;
+      border-bottom: 1px solid #666;
+      color: #fff;
+    }
+
+    #userList li:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>User info. management page</h1>
+
+
+  <div>
+    <h2>User List</h2>
+    <button class="btn" onclick="getUsers()">Load Users</button>
+    <ul id="userList"></ul>
+  </div>
+
+
+  <div>
+    <h2>Add User</h2>
+    <div class="input-box">
+      <input type="text" id="username" placeholder="Username">
+    </div>
+    <div class="input-box">
+      <input type="text" id="email" placeholder="Email">
+    </div>
+    <div class="input-box">
+      <input type="text" id="name" placeholder="Name">
+    </div>
+    <div class="input-box">
+      <input type="text" id="birthdate" placeholder="Birthdate">
+    </div>
+    <div class="input-box">
+      <input type="text" id="phone" placeholder="Phone">
+    </div>
+    <button class="btn" onclick="addUser()">Add User</button>
+  </div>
+
+ 
+  <div>
+    <h2>Update User</h2>
+    <div class="input-box">
+      <input type="text" id="updateUsername" placeholder="Username to Update">
+    </div>
+    <div class="input-box">
+      <input type="text" id="newUsername" placeholder="New Username">
+    </div>
+    <div class="input-box">
+      <input type="text" id="newEmail" placeholder="New Email">
+    </div>
+    <div class="input-box">
+      <input type="text" id="newName" placeholder="New Name">
+    </div>
+    <div class="input-box">
+      <input type="text" id="newBirthdate" placeholder="New Birthdate">
+    </div>
+    <div class="input-box">
+      <input type="text" id="newPhone" placeholder="New Phone">
+    </div>
+    <button class="btn" onclick="updateUser()">Update User</button>
+  </div>
+
+
+  <div>
+    <h2>Delete User</h2>
+    <div class="input-box">
+      <input type="text" id="deleteUsername" placeholder="Username to Delete">
+    </div>
+    <button class="btn" onclick="deleteUser()">Delete User</button>
+  </div>
+
+</div>
+
+<script>
+  const baseURL = 'http://localhost:3000/users';
+
+
+  function getUsers() {
+    fetch(baseURL)
+      .then(response => response.json())
+      .then(data => {
+        const userList = document.getElementById('userList');
+        userList.innerHTML = '';
+        data.forEach(user => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${user.name} (${user.email}, ${user.phone}) - Username: ${user.username}`;
+          userList.appendChild(listItem);
+        });
+      })
+      .catch(error => console.error('Error fetching users:', error));
+  }
+
+  function addUser() {
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const name = document.getElementById('name').value;
+    const birthdate = document.getElementById('birthdate').value;
+    const phone = document.getElementById('phone').value;
+
+    fetch(baseURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, email, name, birthdate, phone })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('User added:', data);
+      getUsers(); 
+    })
+    .catch(error => console.error('Error adding user:', error));
+  }
+
+  function updateUser() {
+    const usernameToUpdate = document.getElementById('updateUsername').value;
+    const newUsername = document.getElementById('newUsername').value;
+    const newEmail = document.getElementById('newEmail').value;
+    const newName = document.getElementById('newName').value;
+    const newBirthdate = document.getElementById('newBirthdate').value;
+    const newPhone = document.getElementById('newPhone').value;
+
+    fetch(baseURL)
+      .then(response => response.json())
+      .then(users => {
+        const user = users.find(u => u.username === usernameToUpdate);
+        if (user) {
+          fetch(`${baseURL}/${user.id}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              username: newUsername || user.username,
+              email: newEmail || user.email,
+              name: newName || user.name,
+              birthdate: newBirthdate || user.birthdate,
+              phone: newPhone || user.phone
+            })
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('User updated:', data);
+            getUsers();
+          })
+          .catch(error => console.error('Error updating user:', error));
+        } else {
+          console.log('User not found');
+        }
+      })
+      .catch(error => console.error('Error fetching users for update:', error));
+  }
+
+  function deleteUser() {
+    const usernameToDelete = document.getElementById('deleteUsername').value;
+
+    fetch(baseURL)
+      .then(response => response.json())
+      .then(users => {
+        const user = users.find(u => u.username === usernameToDelete);
+        if (user) {
+          fetch(`${baseURL}/${user.id}`, {
+            method: 'DELETE'
+          })
+          .then(() => {
+            console.log(`User ${usernameToDelete} deleted`);
+            getUsers(); 
+          })
+          .catch(error => console.error('Error deleting user:', error));
+        } else {
+          console.log('User not found');
+        }
+      })
+      .catch(error => console.error('Error fetching users for deletion:', error));
+  }
+</script>
+</body>
+</html>

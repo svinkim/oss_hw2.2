@@ -1,0 +1,92 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "user1",
+      "email": "one@handong.ac.kr",
+      "name": "김한동",
+      "birthdate": "11111111",
+      "phone": "010-1234-5678"
+    },
+    {
+      "id": "2",
+      "username": "user2",
+      "email": "two@handong.ac.kr",
+      "name": "김두동",
+      "birthdate": "22222222",
+      "phone": "010-2345-6789"
+    },
+    {
+      "id": "3",
+      "username": "user3",
+      "email": "three@handong.ac.kr",
+      "name": "김세동",
+      "birthdate": "33333333",
+      "phone": "010-3456-7890"
+    },
+    {
+      "id": "4",
+      "username": "user4",
+      "email": "four@handong.ac.kr",
+      "name": "김네동",
+      "birthdate": "44444444",
+      "phone": "010-4567-8901"
+    },
+    {
+      "id": "5",
+      "username": "user5",
+      "email": "five@handong.ac.kr",
+      "name": "김오동",
+      "birthdate": "55555555",
+      "phone": "010-5678-9012"
+    },
+    {
+      "id": "6",
+      "username": "user6",
+      "email": "six@handong.ac.kr",
+      "name": "김육동",
+      "birthdate": "66666666",
+      "phone": "010-6789-0123"
+    },
+    {
+      "id": "7",
+      "username": "user7",
+      "email": "seven@handong.ac.kr",
+      "name": "김칠동",
+      "birthdate": "77777777",
+      "phone": "010-7890-1234"
+    },
+    {
+      "id": "8",
+      "username": "user8",
+      "email": "eight@handong.ac.kr",
+      "name": "김팔동",
+      "birthdate": "88888888",
+      "phone": "010-8901-2345"
+    },
+    {
+      "id": "9",
+      "username": "user9",
+      "email": "nine@handong.ac.kr",
+      "name": "김구동",
+      "birthdate": "99999999",
+      "phone": "010-9012-3456"
+    },
+    {
+      "id": "10",
+      "username": "user10",
+      "email": "ten@handong.ac.kr",
+      "name": "김십동",
+      "birthdate": "10101010",
+      "phone": "010-0123-4567"
+    },
+    {
+      "id": "885d",
+      "username": "user11",
+      "email": "eleven@handong.ac.kr",
+      "name": "김십일",
+      "birthdate": "11111111",
+      "phone": "010-1234-5678"
+    }
+  ]
+}
