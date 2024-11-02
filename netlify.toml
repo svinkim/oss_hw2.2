@@ -1,4 +1,8 @@
+[build]
+  publish = "."
+
 [[redirects]]
   from = "/"
   to = "/direction.html"
   status = 200
+
